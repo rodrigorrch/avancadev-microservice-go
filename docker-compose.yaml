@@ -12,3 +12,35 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  microsservico-checkout:
+    image: rodrigorrch/checkout-ms:latest 
+    ports:
+      - 9090:9090
+    restart: on-failure
+    depends_on:
+      - "rabbit"
+
+  microsservico-pagamento:
+    image: rodrigorrch/pagamento-ms:latest
+    ports:
+      - 9091:9091
+    restart: on-failure
+    depends_on:
+      - "rabbit"
+
+  microsservico-cupom:
+    image: rodrigorrch/coupon-ms:latest
+    ports:
+      - 9092:9092
+    restart: on-failure
+    depends_on:
+      - "rabbit"
+
+  microsservico-register-coupon:
+    image: rodrigorrch/register-coupon-ms:latest 
+    ports:
+      - 9093:9093
+    restart: on-failure
+    depends_on:
+      - "rabbit"

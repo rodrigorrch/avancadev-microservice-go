@@ -24,7 +24,11 @@ type Order struct {
 }
 
 func NewOrder() Order {
-	return Order{ID: uuid.NewV4()}
+	id, err := uuid.NewV4()
+	if err != nil {
+		log.Fatal("Invalid UUID")
+	}
+	return Order{ID: id}
 }
 
 const (
